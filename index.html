@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Stock - Multiemprendedores</title>
+    <link rel="stylesheet" href="styles.css" >
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">Control De Stock</div>
+            <nav>
+                <ul id="category-list">
+                    <li><a href="#" class="active" data-category="CocinaDePachu">CocinaDePachu</a></li>
+                    <li><a href="#" data-category="Aymara">Aymara Capilares</a></li>
+                    <li><a href="#" data-category="Cecilia">Cecilia Ferreyra</a></li>
+                    <li><a href="#" data-category="BabyBlue">BabyBlue</a></li>
+                </ul>
+            </nav>
+            </aside>
+
+        <main class="content">
+            <header class="top-bar">
+                <h1>Sección: <span>Gastronomía</span></h1>
+                <button class="btn btn-add">+ Agregar Producto</button>
+            </header>
+
+            <section class="product-grid" id="product-grid">
+                </section>
+        </main>
+    </div>
+
+    <div id="modal-add" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-add')">&times;</span>
+            <h2>Nuevo Producto</h2>
+            <form id="form-add-product">
+                <label>Nombre del Producto</label>
+                <input type="text" id="add-name" placeholder="Ej: Alfajores de Maicena" required>
+                
+                <div class="form-row">
+                    <div>
+                        <label>Precio ($)</label>
+                        <input type="number" id="add-price" placeholder="0.00">
+                    </div>
+                    <div>
+                        <label>Stock Inicial</label>
+                        <input type="number" id="add-stock" placeholder="Cant. disponible">
+                    </div>
+                </div>
+
+                <label>Rubro / Categoría</label>
+                <select id="add-category">
+                    <option>CocinaDePachu</option>
+                    <option>Aymara</option>
+                    <option>Cecilia</option>
+                    <option>BabyBlue</option>
+                </select>
+
+                <label>Imágenes</label>
+                <input type="file" multiple accept="image/*">
+                
+                <button type="submit" class="btn btn-add full-width">Guardar Producto</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-reserve" class="modal">
+        <div class="modal-content mini">
+            <span class="close" onclick="closeModal('modal-reserve')">&times;</span>
+            <h2>Reservar Producto</h2>
+            <p id="reserve-product-name" style="margin-bottom: 15px; font-weight: bold;"></p>
+            <label>¿Cuántas unidades?</label>
+            <input type="number" id="reserve-qty" min="1" value="1">
+            <p class="warning-text">Vuelve al stock en 3 días si no se concreta la venta.</p>
+            <button class="btn btn-reserve full-width" onclick="confirmReserve()">Confirmar Reserva</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
