@@ -27,20 +27,25 @@ async function cargarDatos() {
     try {
         const response = await fetch(URL_FIREBASE);
         const data = await response.json();
-        // Convertimos el objeto de Firebase en un array usando la KEY como ID
-        productos = data ? Object.keys(data).map(key => {
+        
+        const nuevosProductos = data ? Object.keys(data).map(key => {
             const p = data[key];
             return {...p, id: key, pedidos: p.pedidos || []};
         }) : [];
-        verificarReservasExpiradas();
-        renderizarProductos();
+
+        // Solo actualizamos la pantalla si los datos de la nube son distintos a los que tenemos
+        if (JSON.stringify(nuevosProductos) !== JSON.stringify(productos)) {
+            productos = nuevosProductos;
+            verificarReservasExpiradas();
+            renderizarProductos();
+            console.log("Sincronizado con la nube...");
+        }
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error cargando Firebase:", error);
     }
 }
 
 async function sincronizar() {
-    // Usamos PUT para actualizar toda la lista de productos
     await fetch(URL_FIREBASE, {
         method: 'PUT',
         body: JSON.stringify(productos)
@@ -153,21 +158,25 @@ window.cancelarPedido = async (index) => {
     else abrirGestionPedidos(productoSeleccionado.id);
 };
 
-// --- ELIMINAR PRODUCTO (CORREGIDO) ---
 window.eliminarProducto = async (id) => {
     const p = productos.find(prod => prod.id === id);
     if(confirm(`¿Estás seguro de eliminar "${p.nombre}"?`)) {
-        // Filtramos por ID para no borrar duplicados por error
         productos = productos.filter(prod => prod.id !== id);
         await sincronizar();
     }
 };
 
-// --- INICIO ---
+// --- INICIO Y AUTO-UPDATE ---
 document.addEventListener('DOMContentLoaded', () => {
     checkUser();
     cargarDatos();
     
+    // --- MOTOR DE ACTUALIZACIÓN EN TIEMPO REAL ---
+    // Revisa Firebase cada 4 segundos para ver si alguien agregó algo
+    setInterval(() => {
+        cargarDatos();
+    }, 4000);
+
     document.querySelector('.btn-add').addEventListener('click', () => {
         document.getElementById('modal-add').style.display = "block";
     });
