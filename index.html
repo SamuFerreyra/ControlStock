@@ -78,6 +78,29 @@
         </div>
     </div>
 
+    <div id="modal-pedidos" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal-pedidos')">&times;</span>
+        <h2>Gestión de Pedidos</h2>
+        <p id="pedidos-product-name" style="font-weight: bold; color: #2563eb;"></p>
+        <hr>
+        <div id="lista-pedidos-detalle" style="margin-top: 15px;">
+            </div>
+    </div>
+</div>
+
+<div id="login-overlay" class="modal" style="display: none; background: rgba(255,255,255,0.95);">
+    <div class="modal-content mini" style="margin-top: 15%; text-align: center;">
+        <h2>¡Hola! 👋</h2>
+        <p>¿Cuál es tu nombre?</p>
+        <input type="text" id="user-name-input" placeholder="Tu nombre o apodo" style="margin: 15px 0;">
+        <button class="btn btn-reserve full-width" onclick="setUserName()">Empezar</button>
+    </div>
+</div>
+
+
+
+
     <script src="script.js"></script>
 </body>
 </html>

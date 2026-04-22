@@ -252,3 +252,26 @@ form input, form select {
     align-items: center;
     justify-content: center;
 }
+
+
+.pedido-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9fafb;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.pedido-item strong {
+    color: #1f2937;
+    text-transform: capitalize;
+}
+
+#login-overlay input {
+    border: 2px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 1rem;
+}
