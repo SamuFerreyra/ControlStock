@@ -275,3 +275,82 @@ form input, form select {
     border-radius: 6px;
     font-size: 1rem;
 }
+
+
+/* --- OPTIMIZACIÓN PARA CELULARES --- */
+@media (max-width: 768px) {
+    /* El contenedor ahora es vertical */
+    .container {
+        flex-direction: column;
+    }
+
+    /* Sidebar ahora es una barra superior de categorías con scroll horizontal */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    /* Lista de categorías horizontal */
+    #category-list {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 5px;
+    }
+
+    #category-list li {
+        margin: 0;
+    }
+
+    #category-list a {
+        white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+        padding: 8px 15px;
+        background: #f3f4f6;
+        border-radius: 20px;
+    }
+
+    #category-list a.active {
+        background: #2563eb;
+        color: white;
+    }
+
+    /* Ajuste de la grilla de productos */
+    .product-grid {
+        grid-template-columns: 1fr; /* Un producto por fila en celus chicos */
+        padding: 10px;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .top-bar h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Modales más grandes para que sea fácil tocar con el dedo */
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .btn {
+        padding: 12px; /* Botones más altos para el dedo */
+        font-size: 1rem;
+    }
+}
